@@ -1,5 +1,5 @@
 import { createBucketClient } from '@cosmicjs/sdk'
-import { BlogPost, Project, WorkExperience } from './types'
+import { BlogPost, Project, WorkExperience } from '../types'
 
 export const cosmic = createBucketClient({
   bucketSlug: process.env.COSMIC_BUCKET_SLUG as string,
