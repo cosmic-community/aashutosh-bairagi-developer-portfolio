@@ -1,4 +1,5 @@
 import { createBucketClient } from '@cosmicjs/sdk'
+import { BlogPost, Project, WorkExperience } from './types'
 
 export const cosmic = createBucketClient({
   bucketSlug: process.env.COSMIC_BUCKET_SLUG as string,
@@ -40,7 +41,7 @@ export async function getProjects() {
       .props(['id', 'title', 'slug', 'metadata'])
       .depth(1)
     
-    return response.objects.sort((a, b) => {
+    return (response.objects as Project[]).sort((a: Project, b: Project) => {
       const orderA = a.metadata?.display_order ?? 999
       const orderB = b.metadata?.display_order ?? 999
       return orderA - orderB
@@ -64,7 +65,7 @@ export async function getFeaturedProjects() {
       .props(['id', 'title', 'slug', 'metadata'])
       .depth(1)
     
-    return response.objects.sort((a, b) => {
+    return (response.objects as Project[]).sort((a: Project, b: Project) => {
       const orderA = a.metadata?.display_order ?? 999
       const orderB = b.metadata?.display_order ?? 999
       return orderA - orderB
@@ -126,7 +127,7 @@ export async function getWorkExperience() {
       .props(['id', 'title', 'metadata'])
       .depth(1)
     
-    return response.objects.sort((a, b) => {
+    return (response.objects as WorkExperience[]).sort((a: WorkExperience, b: WorkExperience) => {
       const orderA = a.metadata?.display_order ?? 999
       const orderB = b.metadata?.display_order ?? 999
       return orderA - orderB
@@ -188,7 +189,7 @@ export async function getBlogPosts() {
       .props(['id', 'title', 'slug', 'metadata', 'created_at'])
       .depth(1)
     
-    return response.objects.sort((a, b) => {
+    return (response.objects as BlogPost[]).sort((a: BlogPost, b: BlogPost) => {
       const dateA = new Date(a.created_at || '').getTime()
       const dateB = new Date(b.created_at || '').getTime()
       return dateB - dateA

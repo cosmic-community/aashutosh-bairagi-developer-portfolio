@@ -1,5 +1,6 @@
 // app/blog/[slug]/page.tsx
 import { getBlogPostBySlug, getBlogPosts } from '@/lib/cosmic'
+import { BlogPost } from '@/types'
 import { notFound } from 'next/navigation'
 import ReactMarkdown from 'react-markdown'
 import { Calendar, Clock } from 'lucide-react'
@@ -7,7 +8,7 @@ import Link from 'next/link'
 
 export async function generateStaticParams() {
   const posts = await getBlogPosts()
-  return posts.map((post) => ({
+  return posts.map((post: BlogPost) => ({
     slug: post.slug,
   }))
 }
@@ -74,7 +75,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
         {post.metadata?.tags && post.metadata.tags.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-8">
-            {post.metadata.tags.map((tag) => (
+            {post.metadata.tags.map((tag: string) => (
               <span
                 key={tag}
                 className="px-3 py-1 bg-gray-800 text-blue-400 rounded-full text-sm"

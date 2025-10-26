@@ -1,4 +1,5 @@
 import { getBlogPosts } from '@/lib/cosmic'
+import { BlogPost } from '@/types'
 import BlogCard from '@/components/BlogCard'
 
 export default async function BlogPage() {
@@ -16,7 +17,7 @@ export default async function BlogPage() {
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {posts.map((post) => (
+          {posts.map((post: BlogPost) => (
             <BlogCard key={post.id} post={post} />
           ))}
         </div>

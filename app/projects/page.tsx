@@ -1,4 +1,5 @@
 import { getProjects } from '@/lib/cosmic'
+import { Project } from '@/types'
 import ProjectCard from '@/components/ProjectCard'
 
 export default async function ProjectsPage() {
@@ -16,7 +17,7 @@ export default async function ProjectsPage() {
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project) => (
+          {projects.map((project: Project) => (
             <ProjectCard key={project.id} project={project} />
           ))}
         </div>

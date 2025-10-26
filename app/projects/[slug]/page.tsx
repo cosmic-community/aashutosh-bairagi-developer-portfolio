@@ -1,5 +1,6 @@
 // app/projects/[slug]/page.tsx
 import { getProjectBySlug, getProjects } from '@/lib/cosmic'
+import { Project } from '@/types'
 import { notFound } from 'next/navigation'
 import ReactMarkdown from 'react-markdown'
 import { ExternalLink, Github } from 'lucide-react'
@@ -7,7 +8,7 @@ import Link from 'next/link'
 
 export async function generateStaticParams() {
   const projects = await getProjects()
-  return projects.map((project) => ({
+  return projects.map((project: Project) => ({
     slug: project.slug,
   }))
 }
@@ -46,7 +47,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
         {project.metadata?.tech_stack && project.metadata.tech_stack.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-8">
-            {project.metadata.tech_stack.map((tech) => (
+            {project.metadata.tech_stack.map((tech: string) => (
               <span
                 key={tech}
                 className="px-3 py-1 bg-gray-800 text-blue-400 rounded-full text-sm"
